@@ -1,93 +1,31 @@
-import styled from "styled-components";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "../styles/bookCard.css"
+import {useCallback} from "react";
 
 interface BookCardProps {
-    name: string,
-    description: string,
-    author: string,
-    bookId: string
+    name: string;
+    description: string;
+    author: string;
+    bookId: string;
+    img: string;
 }
 
-const BookCard: React.FC<BookCardProps> = ({name, description, author, bookId}) => {
+const BookCard: React.FC<BookCardProps> = ({ name, description, author, bookId, img }) => {
     const navigate = useNavigate();
+    const handleClick = useCallback(() => {navigate(`/book/${bookId}`)}, [bookId]);
+
     return (
-        <StyledWrapper onClick={() => navigate(`/book/${bookId}`)}>
-            <div className="card">
-                <div className="card-image" />
-                <div className="category"> {author} </div>
-                <div className="heading">
-                    {" "}
-                    {name}
-                    <div className="author">
-                        {" "}
+            <button className="book-card" onClick={handleClick}>
+                <img className="book-card__image" src={img} alt="book cover" />
+                <div className="book-card__author"> {author} </div>
+                <div className="book-card__title">{name}</div>
+                    <div className="book-card__description">
                         <span className="name">{description}</span>
                     </div>
-                </div>
-            </div>
-        </StyledWrapper>
+
+            </button>
     );
 };
 
-const StyledWrapper = styled.div`
-    .card {
-        border: black solid 1px;
-        margin-left: 10px;
-        margin-right: 10px;
-        width: 250px;
-        height: 350px;
-        background: white;
-        padding: .7em;
-        border-radius: 6px;
-    }
-
-    .card-image {
-        background-color: rgb(236, 236, 236);
-        width: 100%;
-        height: 170px;
-        border-radius: 6px 6px 0 0;
-    }
-
-    .card-image:hover {
-        transform: scale(0.98);
-    }
-
-    .category {
-        text-transform: uppercase;
-        font-size: 0.7em;
-        font-weight: 600;
-        color: rgb(6, 10, 16);
-        padding: 10px 7px 0;
-    }
-
-    .category:hover {
-        cursor: pointer;
-    }
-
-    .heading {
-        font-weight: 600;
-        color: rgb(2, 1, 1);
-        padding: 7px;
-
-    }
-
-    .heading:hover {
-        cursor: pointer;
-    }
-
-    .author {
-        color: gray;
-        font-weight: 400;
-        font-size: 11px;
-        padding-top: 20px;
-    }
-
-    .name {
-        font-weight: 600;
-    }
-
-    .name:hover {
-        cursor: pointer;
-    }
-`;
 
 export default BookCard;

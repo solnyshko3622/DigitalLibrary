@@ -2,14 +2,17 @@ import {Col, Row} from "antd";
 import BookCard from "./BookCard.tsx";
 
 interface Book {
-    id: number;
+    id: string;
+    documentId: string;
     name: string;
-    author: string;
     description: string;
-    documentId: string
+    author: string;
+    image: string;
+    documentName: string;
+    documentMime: string;
+    documentUrl: string;
 }
 
-// Определяем интерфейс пропсов компонента, который принимает массив книг
 interface BookListProps {
     books: Book[];
 }
@@ -21,7 +24,11 @@ const BookList: React.FC<BookListProps> = ({books}) => {
                 <Col span={8}
                      key={book.id}
                      style={{marginTop: "20px", minWidth: "250px"}}>
-                    <BookCard name={book.name} description={book.description} author={book.author} bookId={book.documentId} />
+                    <BookCard name={book.name}
+                              description={book.description}
+                              author={book.author}
+                              bookId={book.documentId}
+                              img = {book.image}/>
                 </Col>
             ))}
         </Row>

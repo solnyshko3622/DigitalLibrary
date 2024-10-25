@@ -9,6 +9,9 @@ interface Book {
     description: string;
     author: string;
     image: string;
+    documentName: string;
+    documentMime: string;
+    documentUrl: string;
 }
 
 class BookStore {
@@ -38,6 +41,9 @@ class BookStore {
                 description: book.description || '',
                 author: book.author || '',
                 image: book.image?.[0]?.url ? `http://localhost:1337${book.image[0].url}` : '',
+                documentName: book.book?.name ? `http://localhost:1337${book.book.name}` : '',
+                documentMime: book.book?.mime ? `http://localhost:1337${book.book.mime}` : '',
+                documentUrl: book.book?.url ? `http://localhost:1337${book.book.url}` : ''
             };
 
             console.log(`http://localhost:1337/api/books/${bookId}`)
