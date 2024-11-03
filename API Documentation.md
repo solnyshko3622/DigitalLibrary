@@ -227,7 +227,7 @@
 
 ## 5. Get book by id
 **Endpoint:** `GET /books/${bookId}?populate=*
-**Description:** Get list of all books by title. 
+**Description:** Get book ny id. 
 **Types:**
 	id: book.id,  
 	documentId: book.documentId,  
